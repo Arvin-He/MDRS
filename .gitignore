@@ -1,0 +1,8 @@
+*.suo 
+*.sdf 
+ipch/ 
+Debug/ 
+MDRS/Debug/ 
+MDRS/*.vcxproj 
+MDRS/*.vcxproj.*
+MDRS/DirectShow

@@ -1,0 +1,57 @@
+动态链接库说明：
+
+int	iMac;			//机箱号
+int	iCh;			//通道号
+float	MinVoltage;		//最小电压
+float	MaxVoltage;		//最大电压
+float	MinInterval;		//最小位移
+float	MaxInterval;		//最大位移
+float	MinDA;			//最小DA
+float	MaxDA;			//最大DA
+float	MinAD;			//最小AD
+float	MaxAD;			//最大AD
+
+//加载系统并口驱动，需指定并口的控制口输入号(通常为并口的四字节输入地址那个)
+BOOL	CALLBACK	InitParallel(unsigned short usData, unsigned short usCtrl);
+
+//判断超时,所有函数调用成功与否，均可以用此函数来判断。超时返回TRUE，没有超时返回FALSE。
+BOOL	CALLBACK	GetTimeOut(unsigned short usData);
+
+//清除超时,清除EPP并口超时位。
+void	CALLBACK	ClearTimeOut(unsigned short usData);
+
+//当系统读取EPP信息时，确定系统状态
+CALLBACK	ReadEppStatus(unsigned short usData);
+
+//当系统向EPP写入信息时，确定系统状态
+BOOL	CALLBACK	WriteEppStatus(unsigned short usData);
+
+//获得系统EPP并口信息
+BOOL 	CALLBACK 	GetEppInfo(unsigned short usData,int iMac,int iCh)
+
+//设置系统EPP并口信息
+BOOL 	CALLBACK 	SetEppInfo(unsigned short usData,int iMac,int iCh,float maxVoltage,float minVoltage,float maxInterval,float minInterval,float maxAD,float minAD,float maxDA,float minDA)
+
+//上位机闭环控制
+BOOL	CALLBACK 	EpigynyClose(unsigned short usData,int iMac,int iCh)
+
+//上位机开环控制
+BOOL	CALLBACK 	EpigynyOpen(unsigned short usData,int iMac,int iCh)
+
+//下位机开环控制
+BOOL	CALLBACK	HypogynyOpen(unsigned short usData,int iMac,int iCh)
+
+//下位机闭环控制
+BOOL	CALLBACK 	HypogynyClose(unsigned short usData,int iMac,int iCh)
+
+//模拟控制命令
+BOOL	CALLBACK 	SimulateCtrl(unsigned short usData,int iMac,int iCh)
+
+//读取指定机箱、通道的位移
+float   CALLBACK 	ReadInterval(unsigned short usData,int iMac,int iCh,float maxInterval,float minInterval,float maxAD,float minAD)
+
+//向指定机箱、通道发送位移指令
+BOOL	CALLBACK 	WriteInterval(unsigned short usData,int iMac,int iCh,float value,float maxInterval,float minInterval,float maxAD,float minAD)
+
+//向指定机箱、通道发送电压指令
+BOOL	CALLBACK	WriteVoltage(unsigned short usData,int iMac,int iCh,float value,float maxVoltage,float minVoltage,float maxDA,float minDA)
